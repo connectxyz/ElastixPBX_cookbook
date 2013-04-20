@@ -17,6 +17,10 @@ Attributes
 ----------
 TODO: List you cookbook attributes here.
 
+where do updates come from when you do an install from cd as opposed to installing the way we are in default.rb:
+http://www.elastixbrasil.com.br/downloads/Elastix_2.3_HA_Cluster.pdf
+
+
 e.g.
 #### ElastixPBX-cookbook::default
 <table>
