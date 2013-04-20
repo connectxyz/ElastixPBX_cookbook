@@ -1,0 +1,61 @@
+*filter
+:INPUT ACCEPT [6833:845203]
+:FORWARD ACCEPT [5349:3491918]
+:OUTPUT ACCEPT [354:183501]
+:LOGGING - [0:0]
+
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp --dport 22 -s 50.125.113.138 -i eth0 -j ACCEPT
+-A INPUT -p tcp --dport 22 -s 50.125.113.140 -i eth0 -j ACCEPT
+
+-A INPUT -p tcp --dport 22 -s 10.181.26.51 -i eth1 -j ACCEPT
+-A INPUT -p tcp --dport 7788 -s 10.181.20.246 -i eth1 -j ACCEPT
+-A INPUT -p udp --dport 7788 -s 10.181.20.246 -i eth1 -j ACCEPT
+-A INPUT -p udp --dport 694 -s 10.181.20.246 -i eth1 -j ACCEPT
+-A INPUT -p udp --dport 694 -s 10.182.8.232 -i eth1 -j ACCEPT
+
+
+-A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+#Open ports for standard stuff
+-A INPUT -p tcp -s 50.125.113.138 --dport 80 -i eth0 -j ACCEPT
+-A INPUT -p tcp -s 50.125.113.138 --dport 443 -i eth0 -j ACCEPT
+
+-A INPUT -p tcp -s 50.125.113.140 --dport 80 -i eth0 -j ACCEPT
+-A INPUT -p tcp -s 50.125.113.140 --dport 443 -i eth0 -j ACCEPT
+
+#PBX and Exchange Ports
+-A FORWARD -p udp -m udp -s 50.125.113.138 --dport 2979 -i eth0 -j ACCEPT
+-A INPUT -p udp -m udp -s 50.125.113.138 --dport 40000:40046 -i eth0 -j ACCEPT
+-A FORWARD -p udp -m udp -s 50.125.113.138 --dport 1719 -i eth0 -j ACCEPT
+-A FORWARD -p tcp -m tcp -s 50.125.113.138 --dport 1720 -i eth0 -j ACCEPT
+-A INPUT -p tcp -m tcp -s 50.125.113.138 --dport 5060 -i eth0 -j ACCEPT
+-A INPUT -p udp -m udp -s 50.125.113.138 --dport 5060 -i eth0 -j ACCEPT
+-A FORWARD -p tcp -m tcp -s 50.125.113.138 --dport 4569 -i eth0 -j ACCEPT
+-A FORWARD -p udp -m udp -s 50.125.113.138 --dport 4569 -i eth0 -j ACCEPT
+-A INPUT -p tcp -s 50.125.113.138 --dport 5060 -i eth0 -j ACCEPT
+-A FORWARD -p udp -m udp -s 50.125.113.138 --dport 5036 -i eth0 -j ACCEPT
+-A FORWARD -p tcp -m tcp -s 50.125.113.138 --dport 5065 -i eth0 -j ACCEPT
+-A FORWARD -p udp -m udp -s 50.125.113.138 --dport 2727 -i eth0 -j ACCEPT
+-A INPUT -p udp -m udp -s 50.125.113.138 --dport 10000:20000 -i eth0 -j ACCEPT
+
+-A FORWARD -p udp -m udp -s 50.125.113.140 --dport 2979 -i eth0 -j ACCEPT
+-A INPUT -p udp -m udp -s 50.125.113.140 --dport 40000:40046 -i eth0 -j ACCEPT
+-A FORWARD -p udp -m udp -s 50.125.113.140 --dport 1719 -i eth0 -j ACCEPT
+-A FORWARD -p tcp -m tcp -s 50.125.113.140 --dport 1720 -i eth0 -j ACCEPT
+-A INPUT -p tcp -m tcp -s 50.125.113.140 --dport 5060 -i eth0 -j ACCEPT
+-A INPUT -p udp -m udp -s 50.125.113.140 --dport 5060 -i eth0 -j ACCEPT
+-A FORWARD -p tcp -m tcp -s 50.125.113.140 --dport 4569 -i eth0 -j ACCEPT
+-A FORWARD -p udp -m udp -s 50.125.113.140 --dport 4569 -i eth0 -j ACCEPT
+-A INPUT -p tcp -s 50.125.113.140 --dport 5060 -i eth0 -j ACCEPT
+-A FORWARD -p udp -m udp -s 50.125.113.140 --dport 5036 -i eth0 -j ACCEPT
+-A FORWARD -p tcp -m tcp -s 50.125.113.140 --dport 5065 -i eth0 -j ACCEPT
+-A FORWARD -p udp -m udp -s 50.125.113.140 --dport 2727 -i eth0 -j ACCEPT
+-A INPUT -p udp -m udp -s 50.125.113.140 --dport 10000:20000 -i eth0 -j ACCEPT
+
+
+-A INPUT -j LOGGING
+-A LOGGING -m limit --limit 100/min -j LOG --log-prefix "Dropped: "
+-A LOGGING -j DROP
+COMMIT

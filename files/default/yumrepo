@@ -1,0 +1,5 @@
+[elastix-cd]
+name=Elastix RPM Repo CD
+baseurl=file:///mnt/elastix-iso/
+gpgcheck=0
+enabled=1

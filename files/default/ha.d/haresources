@@ -1,0 +1,1 @@
+elastix drbddisk::r0 Filesystem::/dev/drbd0::/replica::ext3 IPaddr::10.182.8.232/24/eth1/10.182.8.255 mysqld asterisk httpd
