@@ -35,3 +35,12 @@ end
 yum_package "elastix" do
   action :install
 end
+
+
+
+#disable selinux
+
+#disable yum auto-update
+
+#install iptables
+

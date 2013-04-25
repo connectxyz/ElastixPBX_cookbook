@@ -4,17 +4,15 @@ default['elastix']['pbx']['server_name'] = 'elastix'
 
 #these should probably default to this
 default['elastix']['pbx']['disable_selinux'] = true
-default['elastix']['pbx']['disable_auto_yum_updates'] = true
+default['elastix']['pbx']['disable_auto_yum_updates'] = true #yum auto will break things.
 
 
 default['elastix']['epel_extensions_rpm'] = 'http://mirror.chpc.utah.edu/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm'
 
-default['elastix']['iptables']['allowed_internet_networks'] = 'this should be a list of networks allowed to connect to services on this server'
-default['elastix']['iptables']['high_availability_network'] = '192.168.3.0/24'
-default['elastix']['iptables']['high_availability_interface'] = 'eth2'
+default['elastix']['iptables']['allowed_wan_networks'] = ['50.125.113.138']
 default['elastix']['iptables']['wan_interface'] = 'eth0'
-default['elastix']['iptables']['servicenet'] = 'eth1'
-
+default['elastix']['iptables']['lan_interface'] = 'eth1'
+default['elastix']['iptables']['lan_network'] = '192.168.3.0/24'
 default['elastix']['high_availability']['enable'] = 'no'
 default['elastix']['drbd']['raw_device'] = '/dev/xvdb'
 default['elastix']['drbd']['virt_device'] = '/dev/drbd0'
